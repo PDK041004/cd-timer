@@ -3,10 +3,10 @@ const startCountdownBtn = document.getElementById('startCountdownBtn');
 const countdownDisplay = document.getElementById('countdownDisplay');
 const countdownStatus = document.getElementById('countdownStatus');
 
-let countdownInterval = localStorage.getItem('countdownInterval') ? localStorage.getItem('countdownInterval') : null;
-let targetTime = localStorage.getItem('targetTime') ? localStorage.getItem('targetTime') : null;
-countdownDisplay.textContent = localStorage.getItem('remainingMs') ? formatTime(Math.floor(localStorage.getItem('remainingMs') / 1000)) : '00:00:00';
-countdownStatus.textContent = localStorage.getItem('countdownStatus') ? localStorage.getItem('countdownStatus') : 'Countdown is not running.';
+let countdownInterval = null;
+let targetTime = null;
+// countdownDisplay.textContent = localStorage.getItem('remainingMs') ? formatTime(Math.floor(localStorage.getItem('remainingMs') / 1000)) : '00:00:00';
+countdownStatus.textContent = localStorage.getItem('countdownStatus') ? localStorage.getItem('countdownStatus') : 'Choose a target date/time to begin.';
 
 function formatTime(totalSeconds) {
 const safeSeconds = Math.max(0, totalSeconds);
@@ -47,7 +47,7 @@ localStorage.setItem('countdownStatus', countdownStatus.textContent);
 startCountdownBtn.addEventListener('click', function () {
 if (!endDateTimeInput.value) {
    countdownStatus.textContent = 'Please select an end date and time first.';
-   localStorage.setItem('countdownStatus', countdownStatus.textContent);
+   localStorage.setItem('countdownStatus', "Error: No date/time selected.");
    return;
 }
 
@@ -55,6 +55,7 @@ targetTime = new Date(endDateTimeInput.value).getTime();
 
 if (Number.isNaN(targetTime)) {
    countdownStatus.textContent = 'Invalid date/time selected.';
+   localStorage.setItem('countdownStatus', "Error: Invalid date/time selected.");
    return;
 }
 
@@ -62,6 +63,7 @@ localStorage.setItem('targetTime', targetTime);
 
 if (targetTime <= Date.now()) {
    countdownStatus.textContent = 'Selected time has already passed.';
+   localStorage.setItem('countdownStatus', "Error: Selected time has already passed.");
    return;
 }
 
