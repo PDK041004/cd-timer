@@ -29,10 +29,10 @@ const now = Date.now();
 const remainingMs = targetTime - now;
 localStorage.setItem('remainingMs', remainingMs);
 
-if (localStorage.getItem('remainingMs') <= 0) {
+if (localStorage.getItem('remainingMs') == 0) {
    countdownDisplay.textContent = '00:00:00:00';
-   countdownStatus.textContent = 'Countdown complete.';
-   localStorage.setItem('countdownStatus', countdownStatus.textContent);
+   countdownStatus.textContent = 'Choose a target date/time to begin.';
+   localStorage.setItem('countdownStatus', 'Stopped');
    clearInterval(countdownInterval);
    countdownInterval = null;
    return;
@@ -42,7 +42,7 @@ const totalSeconds = Math.floor(remainingMs / 1000);
 countdownDisplay.textContent = formatTime(totalSeconds);
 countdownStatus.textContent = 'Countdown is running...';
 localStorage.setItem('countdownDisplay', countdownDisplay.textContent);
-localStorage.setItem('countdownStatus', countdownStatus.textContent);
+localStorage.setItem('countdownStatus', 'Running');
 }
 
 startCountdownBtn.addEventListener('click', function () {
@@ -57,13 +57,13 @@ startCountdownBtn.addEventListener('click', function () {
 
    if (Number.isNaN(targetTime)) {
       countdownStatus.textContent = 'Invalid date/time selected.';
-      localStorage.setItem('countdownStatus', "Error: Invalid date/time selected.");
+      localStorage.setItem('countdownStatus', 'Error: Invalid date/time selected.');
       return;
    }
 
-   if (targetTime <= Date.now()) {
+   if (targetTime < Date.now()) {
       countdownStatus.textContent = 'Selected time has already passed.';
-      localStorage.setItem('countdownStatus', "Error: Selected time has already passed.");
+      localStorage.setItem('countdownStatus', 'Error: Selected time has already passed.');
       return;
    }
 
