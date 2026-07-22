@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timer Countdown</title>
+  <link href="countdown.css" rel="stylesheet">
+  <script src="countdown.js" defer></script>
+  <!-- <style></style> -->
+</head>
+<body>
+  <div class="timer-card">
+    <h1>Countdown Timer</h1>
+
+    <div class="controls">
+      <label for="endDateTime">
+        Select end date and time
+        <input id="endDateTime" type="datetime-local" />
+      </label>
+      <button id="startCountdownBtn" type="button">Start Countdown</button>
+    </div>
+
+    <div class="countdown">
+      <span class="label">Time remaining</span>
+      <div id="countdownDisplay" class="time">00:00:00</div>
+      <div id="countdownStatus" class="status">Choose a target date/time to begin.</div>
+    </div>
+  </div>
+</body>
+</html>
