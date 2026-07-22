@@ -5,6 +5,7 @@ const countdownStatus = document.getElementById('countdownStatus');
 
 let countdownInterval = localStorage.getItem('countdownInterval') ? localStorage.getItem('countdownInterval') : null;
 let targetTime = localStorage.getItem('targetTime') ? localStorage.getItem('targetTime') : null;
+countdownDisplay.textContent = localStorage.getItem('remainingMs') ? formatTime(Math.floor(localStorage.getItem('remainingMs') / 1000)) : '00:00:00';
 countdownStatus.textContent = localStorage.getItem('countdownStatus') ? localStorage.getItem('countdownStatus') : 'Countdown is not running.';
 
 function formatTime(totalSeconds) {
