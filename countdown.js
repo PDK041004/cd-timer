@@ -3,8 +3,8 @@ const startCountdownBtn = document.getElementById('startCountdownBtn');
 const countdownDisplay = document.getElementById('countdownDisplay');
 const countdownStatus = document.getElementById('countdownStatus');
 
-let countdownInterval = null;
-let targetTime = null;
+let countdownInterval = localStorage.getItem('countdownInterval') ? localStorage.getItem('countdownInterval') : null;
+let targetTime = localStorage.getItem('targetTime') ? localStorage.getItem('targetTime') : null;
 
 function formatTime(totalSeconds) {
 const safeSeconds = Math.max(0, totalSeconds);
@@ -52,6 +52,8 @@ if (Number.isNaN(targetTime)) {
    return;
 }
 
+localStorage.setItem('targetTime', targetTime);
+
 if (targetTime <= Date.now()) {
    countdownStatus.textContent = 'Selected time has already passed.';
    return;
@@ -63,4 +65,5 @@ if (countdownInterval) {
 
 renderCountdown();
 countdownInterval = setInterval(renderCountdown, 1000);
+localStorage.setItem('countdownInterval', countdownInterval);
 });
