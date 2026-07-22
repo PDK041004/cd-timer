@@ -33,6 +33,7 @@ if (localStorage.getItem('remainingMs') == 0) {
    countdownDisplay.textContent = '00:00:00:00';
    countdownStatus.textContent = 'Choose a target date/time to begin.';
    localStorage.setItem('countdownStatus', 'Stopped');
+   localStorage.setItem('remainingMs', null);
    clearInterval(countdownInterval);
    countdownInterval = null;
    return;
@@ -49,28 +50,31 @@ startCountdownBtn.addEventListener('click', function () {
    if (!endDateTimeInput.value) {
       countdownStatus.textContent = 'Please select an end date and time first.';
       localStorage.setItem('countdownStatus', "Error: No date/time selected.");
+      localStorage.setItem('remainingMs', null);
       return;
    }
 
    targetTime = new Date(endDateTimeInput.value).getTime();
    localStorage.setItem('targetTime', targetTime);
 
-   if (Number.isNaN(targetTime)) {
+   if (Number.isNaN(localStorage.getItem('targetTime'))) {
       countdownStatus.textContent = 'Invalid date/time selected.';
       localStorage.setItem('countdownStatus', 'Error: Invalid date/time selected.');
+      localStorage.setItem('remainingMs', null);
       return;
    }
 
-   if (targetTime < Date.now()) {
+   if (localStorage.getItem('targetTime') < Date.now()) {
       countdownStatus.textContent = 'Selected time has already passed.';
       localStorage.setItem('countdownStatus', 'Error: Selected time has already passed.');
+      localStorage.setItem('remainingMs', null);
       return;
    }
 
-   if (targetTime > Date.now()) {
+   if (localStorage.getItem('targetTime') > Date.now()) {
       renderCountdown();
-      countdownInterval = setInterval(renderCountdown, 1000);
-      localStorage.setItem('countdownInterval', countdownInterval);
+      // countdownInterval = setInterval(renderCountdown, 1000);
+      // localStorage.setItem('countdownInterval', countdownInterval);
    }
 
    if (countdownInterval) {
