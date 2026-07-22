@@ -27,25 +27,25 @@ if (!targetTime) {
 
 const now = Date.now();
 const remainingMs;
-while(remainingMs > 0)
-{
+if (localStorage.getItem('remainingMs') > 0)
    remainingMs = targetTime - now;
-   if (localStorage.getItem('remainingMs') == 0) {
-   countdownDisplay.textContent = '00:00:00:00';
-   countdownStatus.textContent = 'Choose a target date/time to begin.';
-   localStorage.setItem('countdownStatus', 'Stopped');
-   localStorage.setItem('remainingMs', null);
-   clearInterval(countdownInterval);
-   countdownInterval = null;
-   return;
-   }
 
-   const totalSeconds = Math.floor(remainingMs / 1000);
-   countdownDisplay.textContent = formatTime(totalSeconds);
-   countdownStatus.textContent = 'Countdown is running...';
-   localStorage.setItem('countdownDisplay', countdownDisplay.textContent);
-   localStorage.setItem('countdownStatus', 'Running');
-}}
+if (localStorage.getItem('remainingMs') == 0) {
+countdownDisplay.textContent = '00:00:00:00';
+countdownStatus.textContent = 'Choose a target date/time to begin.';
+localStorage.setItem('countdownStatus', 'Stopped');
+localStorage.setItem('remainingMs', null);
+clearInterval(countdownInterval);
+countdownInterval = null;
+return;
+}
+
+const totalSeconds = Math.floor(remainingMs / 1000);
+countdownDisplay.textContent = formatTime(totalSeconds);
+countdownStatus.textContent = 'Countdown is running...';
+localStorage.setItem('countdownDisplay', countdownDisplay.textContent);
+localStorage.setItem('countdownStatus', 'Running');
+}
 
 startCountdownBtn.addEventListener('click', function () {
    if (!endDateTimeInput.value) {
