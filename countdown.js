@@ -3,9 +3,9 @@ const startCountdownBtn = document.getElementById('startCountdownBtn');
 const countdownDisplay = document.getElementById('countdownDisplay');
 const countdownStatus = document.getElementById('countdownStatus');
 
-let countdownInterval = null;
+let countdownInterval = localStorage.getItem('countdownInterval') ? parseInt(localStorage.getItem('countdownInterval')) : null;
 let targetTime = localStorage.getItem('targetTime') ? parseInt(localStorage.getItem('targetTime')) : null;
-countdownDisplay.textContent = localStorage.getItem('remainingMs') ? formatTime(Math.floor(localStorage.getItem('remainingMs') / 1000)) : '00:00:00';
+countdownDisplay.textContent = localStorage.getItem('remainingMs') ? formatTime(Math.floor(localStorage.getItem('remainingMs') / 1000)) : '00:00:00:00';
 countdownStatus.textContent = localStorage.getItem('countdownStatus') ? localStorage.getItem('countdownStatus') : 'Choose a target date/time to begin.';
 
 function formatTime(totalSeconds) {
@@ -41,6 +41,7 @@ if (remainingMs <= 0) {
 const totalSeconds = Math.floor(remainingMs / 1000);
 countdownDisplay.textContent = formatTime(totalSeconds);
 countdownStatus.textContent = 'Countdown is running...';
+localStorage.setItem('countdownDisplay', countdownDisplay.textContent);
 localStorage.setItem('countdownStatus', countdownStatus.textContent);
 }
 
