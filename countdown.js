@@ -5,6 +5,7 @@ const countdownStatus = document.getElementById('countdownStatus');
 
 let countdownInterval = localStorage.getItem('countdownInterval') ? localStorage.getItem('countdownInterval') : null;
 let targetTime = localStorage.getItem('targetTime') ? localStorage.getItem('targetTime') : null;
+countdownStatus.textContent = localStorage.getItem('countdownStatus') ? localStorage.getItem('countdownStatus') : 'Countdown is not running.';
 
 function formatTime(totalSeconds) {
 const safeSeconds = Math.max(0, totalSeconds);
@@ -25,10 +26,12 @@ if (!targetTime) {
 
 const now = Date.now();
 const remainingMs = targetTime - now;
+localStorage.setItem('remainingMs', remainingMs);
 
 if (remainingMs <= 0) {
    countdownDisplay.textContent = '00:00:00';
    countdownStatus.textContent = 'Countdown complete.';
+   localStorage.setItem('countdownStatus', countdownStatus.textContent);
    clearInterval(countdownInterval);
    countdownInterval = null;
    return;
@@ -37,11 +40,13 @@ if (remainingMs <= 0) {
 const totalSeconds = Math.floor(remainingMs / 1000);
 countdownDisplay.textContent = formatTime(totalSeconds);
 countdownStatus.textContent = 'Countdown is running...';
+localStorage.setItem('countdownStatus', countdownStatus.textContent);
 }
 
 startCountdownBtn.addEventListener('click', function () {
 if (!endDateTimeInput.value) {
    countdownStatus.textContent = 'Please select an end date and time first.';
+   localStorage.setItem('countdownStatus', countdownStatus.textContent);
    return;
 }
 
