@@ -29,8 +29,8 @@ const now = Date.now();
 const remainingMs = targetTime - now;
 localStorage.setItem('remainingMs', remainingMs);
 
-if (remainingMs <= 0) {
-   countdownDisplay.textContent = '00:00:00';
+if (localStorage.getItem('remainingMs') <= 0) {
+   countdownDisplay.textContent = '00:00:00:00';
    countdownStatus.textContent = 'Countdown complete.';
    localStorage.setItem('countdownStatus', countdownStatus.textContent);
    clearInterval(countdownInterval);
