@@ -67,6 +67,12 @@ startCountdownBtn.addEventListener('click', function () {
       return;
    }
 
+   if (targetTime > Date.now()) {
+      renderCountdown();
+      countdownInterval = setInterval(renderCountdown, 1000);
+      localStorage.setItem('countdownInterval', countdownInterval);
+   }
+
    if (countdownInterval) {
       clearInterval(countdownInterval);
    }
