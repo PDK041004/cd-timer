@@ -1,7 +1,7 @@
 :root {
 color-scheme: dark;
---bg: #101820;
---panel: #182430;
+--bg: #40d500;
+--panel: #358500;
 --text: #f5f7fa;
 --accent: #5cc8ff;
 --muted: #9db0bf;
@@ -16,15 +16,15 @@ margin: 0;
 min-height: 100vh;
 display: grid;
 place-content: center;
-background: radial-gradient(circle at top, #1d2c3d, var(--bg));
+background: radial-gradient(circle at top, var(--bg), #183900);
 font-family: Arial, Helvetica, sans-serif;
 color: var(--text);
 }
 
 .timer-card {
 width: min(92vw, 520px);
-background: rgba(24, 36, 48, 0.95);
-border: 1px solid rgba(255, 255, 255, 0.08);
+background: #012650;
+border: 1px solid #1e436c;
 border-radius: 18px;
 padding: 24px;
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
