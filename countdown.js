@@ -78,6 +78,7 @@ startCountdownBtn.addEventListener('click', function () {
       countdownStatus.textContent = 'Please select an end date and time first.';
       localStorage.setItem('Countdown Status', "Error: No date/time selected.");
       localStorage.setItem('Target Time', null);
+      localStorage.setItem('Countdown Display', '00:00:00:00');
       return;
    }
    else
@@ -89,6 +90,7 @@ startCountdownBtn.addEventListener('click', function () {
          countdownStatus.textContent = 'Invalid date/time selected.';
          localStorage.setItem('Countdown Status', 'Error: Invalid date/time selected.');
          localStorage.setItem('Target Time', null);
+         localStorage.setItem('Countdown Display', '00:00:00:00');
          return;
       }
 
@@ -96,6 +98,7 @@ startCountdownBtn.addEventListener('click', function () {
          countdownStatus.textContent = 'Selected time has already passed.';
          localStorage.setItem('Countdown Status', 'Error: Selected time has already passed.');
          localStorage.setItem('Target Time', null);
+         localStorage.setItem('Countdown Display', '00:00:00:00');
          return;
       }
 
