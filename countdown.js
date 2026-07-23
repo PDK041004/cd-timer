@@ -79,6 +79,7 @@ startCountdownBtn.addEventListener('click', function () {
       localStorage.setItem('Countdown Status', "Error: No date/time selected.");
       localStorage.setItem('Target Time', null);
       localStorage.setItem('Countdown Display', '00:00:00:00');
+      countdownDisplay.textContent = localStorage.getItem('Countdown Display');
       return;
    }
    else
@@ -91,6 +92,7 @@ startCountdownBtn.addEventListener('click', function () {
          localStorage.setItem('Countdown Status', 'Error: Invalid date/time selected.');
          localStorage.setItem('Target Time', null);
          localStorage.setItem('Countdown Display', '00:00:00:00');
+         countdownDisplay.textContent = localStorage.getItem('Countdown Display');
          return;
       }
 
@@ -99,6 +101,7 @@ startCountdownBtn.addEventListener('click', function () {
          localStorage.setItem('Countdown Status', 'Error: Selected time has already passed.');
          localStorage.setItem('Target Time', null);
          localStorage.setItem('Countdown Display', '00:00:00:00');
+         countdownDisplay.textContent = localStorage.getItem('Countdown Display');
          return;
       }
 
@@ -106,17 +109,8 @@ startCountdownBtn.addEventListener('click', function () {
          clearInterval(countdownInterval);
       }
       loadCd()
-      // renderCd();
-      // countdownInterval = setInterval(renderCd, 1000);
-      // localStorage.setItem('Countdown Interval', countdownInterval);
    }
-   // renderCd();
-   // countdownInterval = setInterval(renderCd, 1000);
-   // localStorage.setItem('Countdown Interval', countdownInterval);
 });
 
 initComp();
 loadCd();
-// renderCd();
-// countdownInterval = setInterval(renderCd, 1000);
-// localStorage.setItem('Countdown Interval', countdownInterval);
